@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ujian Online TIK - 25 Soal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        /* Animasi smooth untuk progress bar */
+        #progress-bar { transition: width 0.5s ease-in-out; }
+    </style>
+</head>
+<body class="bg-slate-100 min-h-screen flex items-center justify-center p-4">
+
+    <div class="bg-white w-full max-w-2xl rounded-2xl shadow-xl overflow-hidden my-4">
+        
+        <div class="bg-blue-600 p-6 text-center relative">
+            <div class="bg-white w-20 h-20 rounded-full mx-auto flex items-center justify-center mb-3 shadow-lg overflow-hidden border-2 border-blue-200">
+                <img src="logo.png" alt="Logo Sekolah" class="w-full h-full object-cover">
+            </div>
+            <h1 class="text-white text-2xl font-bold tracking-wide">UJIAN SEKOLAH TIK</h1>
+            <p class="text-blue-100 text-sm mt-1">Mata Pelajaran: Teknologi Informasi dan Komunikasi</p>
+            
+            <div class="absolute top-4 right-4 bg-blue-700 text-white text-xs px-3 py-1 rounded-full border border-blue-500">
+                <span id="current-question-num">1</span> / 25
+            </div>
+        </div>
+
+        <div class="p-6 md:p-8" id="quiz-area">
+            
+            <div class="w-full bg-gray-200 rounded-full h-2 mb-6">
+                <div class="bg-blue-500 h-2 rounded-full" id="progress-bar" style="width: 0%"></div>
+            </div>
+
+            <h2 class="text-lg md:text-xl font-bold text-gray-800 mb-6 leading-relaxed" id="question-text">
+                Sedang memuat soal...
+            </h2>
+
+            <div class="space-y-3">
+                <div>
+                    <input type="radio" name="answer" id="a" class="peer hidden answer-input">
+                    <label for="a" class="flex items-center p-3 md:p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:bg-blue-50 hover:border-blue-300 transition-all duration-200 peer-checked:bg-blue-600 peer-checked:text-white peer-checked:border-blue-600 shadow-sm group">
+                        <span class="w-8 h-8 flex-shrink-0 flex items-center justify-center bg-gray-100 rounded-full mr-4 text-gray-600 font-bold group-hover:bg-white peer-checked:bg-white peer-checked:text-blue-600 text-sm transition-colors">A</span>
+                        <span id="text_a" class="font-medium text-sm md:text-base">Pilihan A</span>
+                    </label>
+                </div>
+
+                <div>
+                    <input type="radio" name="answer" id="b" class="peer hidden answer-input">
+                    <label for="b" class="flex items-center p-3 md:p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:bg-blue-50 hover:border-blue-300 transition-all duration-200 peer-checked:bg-blue-600 peer-checked:text-white peer-checked:border-blue-600 shadow-sm group">
+                        <span class="w-8 h-8 flex-shrink-0 flex items-center justify-center bg-gray-100 rounded-full mr-4 text-gray-600 font-bold group-hover:bg-white peer-checked:bg-white peer-checked:text-blue-600 text-sm transition-colors">B</span>
+                        <span id="text_b" class="font-medium text-sm md:text-base">Pilihan B</span>
+                    </label>
+                </div>
+
+                <div>
+                    <input type="radio" name="answer" id="c" class="peer hidden answer-input">
+                    <label for="c" class="flex items-center p-3 md:p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:bg-blue-50 hover:border-blue-300 transition-all duration-200 peer-checked:bg-blue-600 peer-checked:text-white peer-checked:border-blue-600 shadow-sm group">
+                        <span class="w-8 h-8 flex-shrink-0 flex items-center justify-center bg-gray-100 rounded-full mr-4 text-gray-600 font-bold group-hover:bg-white peer-checked:bg-white peer-checked:text-blue-600 text-sm transition-colors">C</span>
+                        <span id="text_c" class="font-medium text-sm md:text-base">Pilihan C</span>
+                    </label>
+                </div>
+
+                <div>
+                    <input type="radio" name="answer" id="d" class="peer hidden answer-input">
+                    <label for="d" class="flex items-center p-3 md:p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:bg-blue-50 hover:border-blue-300 transition-all duration-200 peer-checked:bg-blue-600 peer-checked:text-white peer-checked:border-blue-600 shadow-sm group">
+                        <span class="w-8 h-8 flex-shrink-0 flex items-center justify-center bg-gray-100 rounded-full mr-4 text-gray-600 font-bold group-hover:bg-white peer-checked:bg-white peer-checked:text-blue-600 text-sm transition-colors">D</span>
+                        <span id="text_d" class="font-medium text-sm md:text-base">Pilihan D</span>
+                    </label>
+                </div>
+            </div>
+
+            <button id="submit" class="w-full mt-8 bg-blue-600 text-white font-bold py-3.5 rounded-xl shadow-lg hover:bg-blue-700 hover:shadow-xl transition-all duration-300 transform active:scale-95 focus:outline-none focus:ring-4 focus:ring-blue-300">
+                Lanjut ke Soal Berikutnya
+            </button>
+        </div>
+
+        <div id="result-area" class="hidden p-10 text-center">
+            <div class="mb-6 animate-bounce">
+                <svg class="w-20 h-20 mx-auto text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            </div>
+            <h2 class="text-3xl font-bold text-gray-800 mb-2">Ujian Selesai!</h2>
+            <p class="text-gray-500 mb-6">Terima kasih telah mengerjakan dengan jujur.</p>
+            
+            <div class="bg-blue-50 p-6 rounded-2xl border border-blue-100 mb-8 inline-block min-w-[200px]">
+                <span class="block text-blue-500 text-sm uppercase tracking-wide font-bold">Nilai Akhir</span>
+                <span id="final-score" class="block text-6xl font-extrabold text-blue-700 mt-2">0</span>
+            </div>
+
+            <div class="text-left bg-gray-50 p-4 rounded-lg text-sm text-gray-600 mb-8 space-y-2">
+                <div class="flex justify-between">
+                    <span>Jumlah Soal:</span>
+                    <span class="font-bold">25</span>
+                </div>
+                <div class="flex justify-between">
+                    <span>Jawaban Benar:</span>
+                    <span id="correct-count" class="font-bold text-green-600">0</span>
+                </div>
+                <div class="flex justify-between">
+                    <span>Jawaban Salah:</span>
+                    <span id="wrong-count" class="font-bold text-red-500">0</span>
+                </div>
+            </div>
+
+            <button onclick="location.reload()" class="w-full bg-gray-800 text-white px-8 py-3 rounded-lg font-semibold hover:bg-gray-900 transition shadow-md">
+                Ulangi Ujian
+            </button>
+        </div>
+        
+        <div class="bg-gray-50 p-3 text-center border-t border-gray-100">
+            <p class="text-xs text-gray-400">© 2025 Laboratorium TIK - Ujian Berbasis Komputer</p>
+        </div>
+
+    </div>
+
+    <script>
+        // DATABASE 25 SOAL TIK
+        // Format: { question: "", a: "", b: "", c: "", d: "", correct: "" }
+        const quizData = [
+            // SOAL 1-5 (Hardware & Basics)
+            { question: "1. Apa kepanjangan dari CPU?", a: "Central Processing Unit", b: "Computer Personal Unit", c: "Central Program Utility", d: "Control Panel Unit", correct: "a" },
+            { question: "2. Perangkat keras yang berfungsi untuk menampilkan hasil pemrosesan data (output) adalah...", a: "Keyboard", b: "Mouse", c: "Monitor", d: "Scanner", correct: "c" },
+            { question: "3. Perangkat yang digunakan untuk memasukkan data suara ke dalam komputer adalah...", a: "Speaker", b: "Microphone", c: "Printer", d: "Plotter", correct: "b" },
+            { question: "4. Tombol 'Shut Down' digunakan untuk...", a: "Menyalakan komputer", b: "Mematikan komputer", c: "Merestart komputer", d: "Menidurkan komputer", correct: "b" },
+            { question: "5. Otak dari komputer yang memproses semua perintah disebut...", a: "Processor", b: "Power Supply", c: "Motherboard", d: "VGA Card", correct: "a" },
+            
+            // SOAL 6-10 (Software & OS)
+            { question: "6. Manakah di bawah ini yang termasuk Sistem Operasi?", a: "Microsoft Word", b: "Google Chrome", c: "Windows 10", d: "Adobe Photoshop", correct: "c" },
+            { question: "7. Program yang digunakan untuk menjelajahi internet (browsing) disebut...", a: "File Explorer", b: "Web Browser", c: "Antivirus", d: "Calculator", correct: "b" },
+            { question: "8. Contoh perangkat lunak pengolah kata adalah...", a: "Microsoft Excel", b: "Microsoft Word", c: "Microsoft PowerPoint", d: "Microsoft Access", correct: "b" },
+            { question: "9. Pengguna komputer biasa disebut dengan istilah...", a: "Hardware", b: "Software", c: "Brainware", d: "Spyware", correct: "c" },
+            { question: "10. Program berbahaya yang dapat merusak sistem komputer disebut...", a: "Antivirus", b: "Virus/Malware", c: "Firewall", d: "Utility", correct: "b" },
+
+            // SOAL 11-15 (Shortcuts & File Ext)
+            { question: "11. Tombol kombinasi keyboard untuk melakukan perintah 'Copy' adalah...", a: "Ctrl + V", b: "Ctrl + C", c: "Ctrl + X", d: "Ctrl + P", correct: "b" },
+            { question: "12. Tombol kombinasi untuk 'Paste' (Tempel) adalah...", a: "Ctrl + S", b: "Ctrl + V", c: "Ctrl + C", d: "Ctrl + Z", correct: "b" },
+            { question: "13. Tombol kombinasi untuk menyimpan dokumen (Save) adalah...", a: "Ctrl + S", b: "Ctrl + O", c: "Ctrl + N", d: "Ctrl + P", correct: "a" },
+            { question: "14. Ekstensi file standar untuk dokumen Microsoft Excel adalah...", a: ".docx", b: ".pptx", c: ".xlsx", d: ".pdf", correct: "c" },
+            { question: "15. Ekstensi file .jpg atau .png adalah format untuk file...", a: "Video", b: "Suara", c: "Gambar", d: "Teks", correct: "c" },
+
+            // SOAL 16-20 (Internet & Network)
+            { question: "16. Jaringan komputer yang mencakup wilayah global atau dunia disebut...", a: "LAN", b: "MAN", c: "WAN (Internet)", d: "PAN", correct: "c" },
+            { question: "17. Apa kepanjangan dari Wi-Fi?", a: "Wireless Fidelity", b: "Wire Fine", c: "Wireless Final", d: "Wide Frequency", correct: "a" },
+            { question: "18. www dalam alamat website singkatan dari...", a: "World Web Wide", b: "World Wide Web", c: "Wide World Web", d: "Web World Wide", correct: "b" },
+            { question: "19. Aplikasi untuk mengirim surat elektronik disebut...", a: "E-Commerce", b: "E-Learning", c: "E-Mail", d: "E-Wallet", correct: "c" },
+            { question: "20. Mesin pencari (Search Engine) paling populer saat ini adalah...", a: "Facebook", b: "Google", c: "Instagram", d: "WhatsApp", correct: "b" },
+
+            // SOAL 21-25 (General TIK Knowledge)
+            { question: "21. Media penyimpanan data eksternal yang mudah dibawa kemana-mana adalah...", a: "RAM", b: "Flashdisk", c: "VGA", d: "Motherboard", correct: "b" },
+            { question: "22. Ikon 'Recycle Bin' di Windows berfungsi untuk...", a: "Menyimpan file permanen", b: "Menampung file yang dihapus sementara", c: "Mempercepat komputer", d: "Menghapus virus", correct: "b" },
+            { question: "23. Fitur untuk menebalkan huruf pada aplikasi Office adalah...", a: "Italic", b: "Bold", c: "Underline", d: "Justify", correct: "b" },
+            { question: "24. Tombol keyboard 'Esc' biasanya digunakan untuk...", a: "Menyetujui perintah", b: "Membatalkan perintah/Keluar", c: "Menghapus karakter", d: "Membuat baris baru", correct: "b" },
+            { question: "25. Proses menyalakan ulang komputer disebut...", a: "Shutdown", b: "Sleep", c: "Restart", d: "Install", correct: "c" }
+        ];
+
+        // VARIABEL SYSTEM
+        const quizArea = document.getElementById('quiz-area');
+        const resultArea = document.getElementById('result-area');
+        const answerEls = document.querySelectorAll('.answer-input');
+        
+        const questionEl = document.getElementById('question-text');
+        const text_a = document.getElementById('text_a');
+        const text_b = document.getElementById('text_b');
+        const text_c = document.getElementById('text_c');
+        const text_d = document.getElementById('text_d');
+        const submitBtn = document.getElementById('submit');
+        const currentNumEl = document.getElementById('current-question-num');
+        
+        const finalScoreEl = document.getElementById('final-score');
+        const correctCountEl = document.getElementById('correct-count');
+        const wrongCountEl = document.getElementById('wrong-count');
+        const progressBar = document.getElementById('progress-bar');
+
+        let currentQuiz = 0;
+        let score = 0;
+
+        // LOAD QUIZ PERTAMA KALI
+        loadQuiz();
+
+        function loadQuiz() {
+            deselectAnswers();
+
+            const currentQuizData = quizData[currentQuiz];
+
+            // Update Text Soal & Pilihan
+            questionEl.innerText = currentQuizData.question;
+            text_a.innerText = currentQuizData.a;
+            text_b.innerText = currentQuizData.b;
+            text_c.innerText = currentQuizData.c;
+            text_d.innerText = currentQuizData.d;
+
+            // Update Nomor Soal di Pojok Kanan
+            currentNumEl.innerText = currentQuiz + 1;
+
+            // Update Progress Bar (Persentase)
+            let progressPercent = ((currentQuiz) / quizData.length) * 100;
+            progressBar.style.width = `${progressPercent}%`;
+            
+            // Ubah teks tombol jika soal terakhir
+            if(currentQuiz === quizData.length - 1) {
+                submitBtn.innerText = "Selesai & Lihat Nilai";
+                submitBtn.classList.add('bg-green-600', 'hover:bg-green-700'); // Ubah warna jadi hijau biar beda
+                submitBtn.classList.remove('bg-blue-600', 'hover:bg-blue-700');
+            } else {
+                submitBtn.innerText = "Lanjut";
+                submitBtn.classList.add('bg-blue-600', 'hover:bg-blue-700');
+                submitBtn.classList.remove('bg-green-600', 'hover:bg-green-700');
+            }
+            
+            // Scroll ke atas sedikit biar nyaman di HP
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function deselectAnswers() {
+            answerEls.forEach(answerEl => answerEl.checked = false);
+        }
+
+        function getSelected() {
+            let answer;
+            answerEls.forEach(answerEl => {
+                if(answerEl.checked) {
+                    answer = answerEl.id;
+                }
+            });
+            return answer;
+        }
+
+        submitBtn.addEventListener('click', () => {
+            const answer = getSelected();
+
+            if(answer) {
+                if(answer === quizData[currentQuiz].correct) {
+                    score++;
+                }
+
+                currentQuiz++;
+
+                if(currentQuiz < quizData.length) {
+                    loadQuiz();
+                } else {
+                    // Tampilkan Hasil
+                    quizArea.classList.add('hidden');
+                    resultArea.classList.remove('hidden');
+                    
+                    // RUMUS NILAI: (Jumlah Benar / Jumlah Soal) * 100
+                    // Karena 25 soal, maka 1 soal = 4 poin.
+                    let nilaiAkhir = score * 4; 
+                    
+                    finalScoreEl.innerText = nilaiAkhir;
+                    correctCountEl.innerText = score;
+                    wrongCountEl.innerText = quizData.length - score;
+                    
+                    // Progress bar penuh
+                    progressBar.style.width = `100%`;
+                }
+            } else {
+                alert("Harap pilih jawaban terlebih dahulu!");
+            }
+        });
+    </script>
+</body>
+</html>
